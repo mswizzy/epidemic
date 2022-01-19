@@ -124,8 +124,6 @@ public class Epidemic {
         // Role is responsible for figuring out how many people per role
         Role.populateRoles( pop, infected );
 
-        // Schedule the first of the daily reports to be printed
-        Simulator.schedule( 0.0, (double t)-> Person.report( t ) );
     }
 
     /** The main method
@@ -138,6 +136,7 @@ public class Epidemic {
         if (args.length > 1) Error.warn( "too many arguments: " + args[1] );
         try {
             buildModel( new MyScanner( new File( args[0] ) ) );
+            Person.startReporting(true); //start results report
             // Person.printAll(); // BUG:  potentially useful for debugging
             Simulator.run();
         } catch ( FileNotFoundException e ) {
