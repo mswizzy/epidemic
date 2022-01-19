@@ -277,6 +277,23 @@ class Person {
 
     // reporting tools
 
+     /**
+     * Reports in CSV format
+     * @param headline whether or not to include a headline
+     */
+    public static void startReporting (boolean headline) {
+        if (headline) {
+            System.out.print("time");
+            for (DiseaseStates s: DiseaseStates.values()) {
+                System.out.print(",");
+                System.out.print(s.name());
+            }
+            System.out.println();
+        }
+        //schedule first report
+        Simulator.schedule(0.0, (double t)-> Person.report(t));
+    }
+    
     /** Report population statistics at the given time
      *  @param time
      *  Intended to be scheduled as an event at time zero, initiates a
